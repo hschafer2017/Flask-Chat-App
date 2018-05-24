@@ -8,18 +8,24 @@ messages = []
 
 @app.route('/')
 def get_index(): 
-        return "Welcome to the chat!"
+        return render_template('index.html')
 
-@app.route('/<username>')
-def get_userpage(username):
-    return "<h2>Hello, {0}. You've joined the chat!</h2>".format(username)
+@app.route('/login', methods = ["POST"])
+def get_userpage():
+    username = request.form.get('query')
+    return redirect(username) 
 
-@app.route("/<username>/<message>")
+@app.route("/<username>")
+def get_name(username):
+    return str(username) + str(messages) + render_template("chatpage.html")
+    
+    
+@app.route("/<username>/<message>", methods = ["POST"])
 def get_name_message(username,message):
     timing = datetime.datetime.now()
-    message = timing.strftime("%H:%M") + " <strong>" + username + "</strong>" + ": " + message
+    message = timing.strftime("%H:%M") + " <strong>" + username + "</strong>" + ": " + request.form.get("message")
     messages.append(message)
-    return str(messages)
+    return render_template("chatpage.html") + username + str(messages).format(username,message)
 
 
 app.run(host = os.getenv('IP'), port = int(os.getenv('PORT')), debug = True)
