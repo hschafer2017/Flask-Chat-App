@@ -12,7 +12,7 @@ def get_index():
     
 @app.route('/login', methods = ["POST"])
 def get_userpage():
-    username = request.form.get('query')
+    username = request.form['query']
     return redirect(username)
     
 @app.route("/<username>")
@@ -22,7 +22,13 @@ def get_name(username):
 @app.route('/<username>/new', methods=['POST'])
 def add_message(username):
     timing = datetime.datetime.now()
-    message = timing.strftime("%H:%M") + ": " + username + ": " + request.form.get("message").format(username)
+    text = request.form["message"]
+    times = timing.strftime("%H:%M")
+    message = {
+        'time' : times,
+        'sender' : username, 
+        'body' : text
+    }
     messages.append(message)
     f = open("messages.txt", "a")  
     lines = f.write(str(messages)+"\n")
