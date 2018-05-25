@@ -10,10 +10,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.1.1/css/hover-min.css" type="text/css" />
     <title>Document</title>
-    <style type="text/css">
-        /*ul { */
-        /*    lines: 1.5;  */
-        /*}*/
+    <style>
+        body{
+            background-color:lemonchiffon;
+        }
     </style>
 </head>
 
@@ -33,21 +33,14 @@
             </form>
         </div>
         <div class="col-xs-6 col-sm-6">
-            <h5>Active Users: </h5>
-            <ul>
-                <li>{{username}} (you)</li>
-                {% for message in all_the_messages %}
-                <li>{{message.sender}} <input type = "submit" value = "Private Message"/> <input type = "submit" value = "Block"</li>
-                {% endfor %}
-            </ul>
-            
-            <script>
-                setTimeout(function() {
-                    location.reload()
-                }, 5000);
-            </script>
         </div>
     </div>
+    <script>
+        setTimeout(function() {
+            location.reload()
+        }, 5000);
+    </script>
+
 </body>
 
 </html>
